@@ -17,7 +17,7 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                dir('ec2provision') {
+                dir('ec2provision_jenkins') {
                     sh 'terraform init'
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                dir('ec2provision') {
+                dir('ec2provision_jenkins') {
                     sh 'terraform plan'
                 }
             }
@@ -33,7 +33,7 @@ pipeline {
 
         stage('Terraform Apply') {
             steps {
-                dir('ec2provision') {
+                dir('ec2provision_jenkins') {
                     sh 'terraform apply -auto-approve'
                 }
             }
