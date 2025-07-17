@@ -26,7 +26,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('ec2provision_jenkins') {
-                    sh 'terraform plan'
+                    sh 'terraform plan main.tf'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('ec2provision_jenkins') {
-                    sh 'terraform apply -auto-approve'
+                    sh 'terraform apply main.tf --auto-approve'
                 }
             }
         }
