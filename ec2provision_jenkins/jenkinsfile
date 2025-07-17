@@ -2,33 +2,40 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID = credentials('AKIAVD4HEOGKVAWGD3R7')
+        AWS_SECRET_ACCESS_KEY = credentials('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')
         AWS_REGION = 'us-east-1'
     }
 
+ 
     stages {
         stage('Checkout Terraform Code') {
             steps {
-                git 'https://github.com/your-repo/terraform-ec2'
+                git branch: 'main', url: 'https://github.com/BuddoluAnoopKumar/My_terraform_projects.git'
             }
         }
 
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                dir('ec2provision') {
+                    sh 'terraform init'
+                }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                sh 'terraform plan'
+                dir('ec2provision') {
+                    sh 'terraform plan'
+                }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                sh 'terraform apply -auto-approve'
+                dir('ec2provision') {
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
     }
